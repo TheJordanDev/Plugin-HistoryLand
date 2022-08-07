@@ -1,0 +1,26 @@
+name: Historyland
+version: '${project.version}'
+main: fr.thejordan.historyland.Historyland
+api-version: 1.17
+authors: [ TheJordan ]
+depend: [Essentials, WorldGuard]
+description: Plugin pour HistoryLand
+commands:
+  sit:
+  realtime:
+  tpr:
+  chest:
+  rideop:
+  motd:
+  shop:
+  resourcepack:
+  properties:
+  armorstandcommand:
+  collectibles:
+  language:
+  hwarps:
+  hbroadcast:
+  hreload:
+    aliases: [hrl]
+  preferences:
+    aliases: [prefs]

@@ -1,0 +1,26 @@
+off_item:
+  name: §9§lObjet
+  material: NETHER_STAR
+  amount: 1
+  lore: []
+  modelID: 0
+  damage: 0
+  type: OTHER
+head_item:
+  name: §7§lTête de Charlemagne
+  material: PLAYER_HEAD
+  amount: 1
+  lore: []
+  modelID: 0
+  damage: 0
+  skin: <texture de skin>
+  type: HEAD
+chest_item:
+  name: §d§lPlastron
+  material: LEATHER_CHESTPLATE
+  amount: 1
+  lore: []
+  modelID: 0
+  damage: 0
+  type: CHESTPLATE
+  color: rgb(190, 66, 56)

@@ -1,0 +1,8 @@
+name: DefaultShop
+items:
+  '0':
+    id: test_item
+    price: 10.0
+  '1':
+    id: test_item
+    price: 10.0

@@ -1,0 +1,30 @@
+ancienne:
+  slot: 9
+  icon:
+    name: "§4§lHistoire Ancienne"
+    material: "DIAMOND_HOE"
+    damage: 293
+medievale:
+  slot: 11
+  icon:
+    name: "§9§lHistoire Médiévale"
+    material: "DIAMOND_HOE"
+    damage: 121
+moderne:
+  slot: 13
+  icon:
+    name: "§6§lHistoire Moderne"
+    material: "DIAMOND_HOE"
+    damage: 233
+contemporaine:
+  slot: 15
+  icon:
+    name: "§8§lHistoire Contemporaine"
+    material: "DIAMOND_HOE"
+    damage: 243
+gameofthrones:
+  slot: 17
+  icon:
+    name: "§2§lHistoire du Trône de Fer"
+    material: "DIAMOND_HOE"
+    damage: 75

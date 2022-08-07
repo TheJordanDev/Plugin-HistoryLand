@@ -1,0 +1,50 @@
+1:
+  0:
+    name: "Le Grand Spectacle"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: GRANDSPECTACLE
+  1:
+    name: "Le Spectacle"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: SPECTACLE
+  2:
+    name: "L'animation"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: ANIMATION
+2:
+  3:
+    name: "L'attraction"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: ATTRACTION
+  4:
+    name: "L'hôtel"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: HOTEL
+  5:
+    name: "Le restaurant/boutique/lieudit"
+    description:
+      - "Ligne 1"
+      - "Ligne 2"
+      - "Ligne 3"
+    location: "0.0;200.0;0.0;world"
+    type: RESTAURANT_BOUTIQUE_LIEUDIT

@@ -1,0 +1,3 @@
+activity_gift_delay: 60 #Secondes
+activity_gift_amount: 20 #CB de moula à donner
+currency: €
