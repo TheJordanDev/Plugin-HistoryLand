@@ -1,5 +1,6 @@
 package fr.thejordan.historyland.object;
 
+import fr.thejordan.historyland.object.collectible.Collectible;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class Armor {
         return this;
     }
 
-    /*public Armor setFromType(ItemStack itemStack, Collectible.ItemType type) {
+    public Armor setFromType(ItemStack itemStack, Collectible.ItemType type) {
         switch (type) {
             case HEAD -> setHelmet(itemStack);
             case CHESTPLATE -> setChestplate(itemStack);
@@ -65,7 +66,7 @@ public class Armor {
             case OTHER -> { return getOffhand(); }
         }
         return null;
-    }*/
+    }
 
     public Armor(Player player) {
         this.player = player;

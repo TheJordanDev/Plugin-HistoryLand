@@ -28,7 +28,7 @@ public class ShopItem extends Collectible {
 
     public ItemStack shopDisplay(Player player) {
         boolean owns = CollectibleManager.ownes(player,this);
-        BItem item = BItem.of(toItemStack(player,getAmount()))
+        BItem item = BItem.of(toItemStack())
                 .displayName((owns?"§a§l☑ ":"§6§l☐ ")+getName())
                 .aLore("§6" + price+" "+MainManager.instance().data().currency())
                 .sData(Keys.SHOP_ITEM_KEY, PersistentDataType.STRING, "true");

@@ -35,13 +35,14 @@ public class ReloadCommand extends AbstractCommand {
             else if (args[0].equalsIgnoreCase("collectible")) { CollectibleManager.instance().onReload(); ShopManager.instance().onReload(); }
             else if (args[0].equalsIgnoreCase("config")) MainManager.instance().onReload();
             else if (args[0].equalsIgnoreCase("warps")) WarpManager.instance().onReload();
+            else if (args[0].equalsIgnoreCase("resourcepack")) {MainManager.instance().onReload(); ResourcePackManager.instance().onReload(); }
         }
         return false;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        if (args.length == 1) return Helper.autocomplete(args[0], List.of("all", "lang", "shop", "collectible","config","warps"));
+        if (args.length == 1) return Helper.autocomplete(args[0], List.of("all", "lang", "shop", "collectible","config","warps","resourcepack"));
         return List.of();
     }
 

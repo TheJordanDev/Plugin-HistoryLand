@@ -1,5 +1,6 @@
 package fr.thejordan.historyland.manager;
 
+import fr.thejordan.historyland.command.CollectiblesCommand;
 import fr.thejordan.historyland.helper.FileHelper;
 import fr.thejordan.historyland.object.AbstractCommand;
 import fr.thejordan.historyland.object.AbstractManager;
@@ -80,7 +81,9 @@ public class CollectibleManager extends AbstractManager {
 
     @Override
     public List<AbstractCommand> commands() {
-        return null;
+        return List.of(
+                new CollectiblesCommand()
+        );
     }
 
     public static boolean isCollectible(ItemStack stack) {

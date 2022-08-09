@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.helper.TT;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -21,7 +22,6 @@ import org.bukkit.persistence.PersistentDataType;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class BItem {
@@ -61,7 +61,7 @@ public class BItem {
         return this;
     }
     public String displayName() {
-        return stack().getItemMeta().getDisplayName();
+        return (getItemMeta() != null && getItemMeta().hasDisplayName()) ? getItemMeta().getDisplayName() : "";
     }
 
     public BItem lore(String... lore) {
@@ -69,7 +69,7 @@ public class BItem {
         return this;
     }
     public List<String> lore() {
-        return stack().getItemMeta().getLore();
+        return (getItemMeta() != null && getItemMeta().hasLore()) ? getItemMeta().getLore() : List.of();
     }
 
     public BItem aLore(String... lore) {
@@ -91,7 +91,7 @@ public class BItem {
     }
 
     public BItem skin(Skin skin) {
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        GameProfile profile = new GameProfile(Helper.uuidWithSeed(skin.getTexture()), null);
         profile.getProperties().put("textures", new Property("textures", skin.getTexture()));
         Field profileField;
         SkullMeta meta = (SkullMeta) getItemMeta();
@@ -99,6 +99,9 @@ public class BItem {
             profileField = meta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(meta, profile);
+            profileField = meta.getClass().getDeclaredField("serializedProfile");
+            profileField.setAccessible(true);
+            profileField.set(meta, new NBTTagCompound());
         } catch (NoSuchFieldException | IllegalArgumentException | IllegalAccessException e1) {
             e1.printStackTrace();
         }
@@ -115,6 +118,10 @@ public class BItem {
         stack().setAmount(amount);
         return this;
     }
+    public int amount() {
+        return stack().getAmount();
+    }
+
     public BItem glow() {
         enchant(Enchantment.DURABILITY, 1);
         changeMeta((meta) -> meta.addItemFlags(ItemFlag.HIDE_ENCHANTS));
@@ -182,4 +189,10 @@ public class BItem {
         });
         return this;
     }
+
+    public Color color() {
+        if (getItemMeta() instanceof LeatherArmorMeta) return ((LeatherArmorMeta) getItemMeta()).getColor();
+        return null;
+    }
+
 }

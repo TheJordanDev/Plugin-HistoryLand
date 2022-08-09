@@ -27,7 +27,7 @@ public class ShopGUI extends AbstractPagedGUI {
 
     @Override
     public String title() {
-        return Translator.translate("shop_title",getPlayer()).replaceAll("%shop%",shop.getName());
+        return Translator.translate("menu_shop_title",getPlayer()).replaceAll("%shop%",shop.getName());
     }
 
     @Override

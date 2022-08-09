@@ -29,6 +29,7 @@ public final class Historyland extends JavaPlugin {
                 new MainManager(this),
                 new LanguageManager(this),
                 new PreferencesManager(this),
+                new ResourcePackManager(this),
                 new SeatManager(this),
                 new GUIManager(this),
                 new CollectibleManager(this),

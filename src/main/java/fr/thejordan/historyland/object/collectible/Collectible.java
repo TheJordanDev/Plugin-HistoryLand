@@ -13,7 +13,6 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -100,7 +99,7 @@ public class Collectible {
         return new Collectible(id, name, material, amount, lore, modelID, damage, type, data);
     }
 
-    public ItemStack toItemStack(Player player, int amount) {
+    public ItemStack toItemStack() {
         BItem item = BItem.of(material).displayName(name)
                 .amount(amount).lore(lore).unbreakable()
                 .flags(ItemFlag.values()).damage(damage)
@@ -143,12 +142,12 @@ public class Collectible {
 
     }
     public enum ItemType {
-        NONE(-1,"collectible_filter_none"),
-        HEAD(1,"collectible_filter_hat"),
-        CHESTPLATE(1,"collectible_filter_chestplate"),
-        LEGGINGS(1,"collectible_filter_leggings"),
-        BOOTS(1,"collectible_filter_boots"),
-        OTHER(1,"collectible_filter_other");
+        NONE(-1,"menu_collectible_filter_none"),
+        HEAD(1,"menu_collectible_filter_hat"),
+        CHESTPLATE(1,"menu_collectible_filter_chestplate"),
+        LEGGINGS(1,"menu_collectible_filter_leggings"),
+        BOOTS(1,"menu_collectible_filter_boots"),
+        OTHER(1,"menu_collectible_filter_other");
 
         private final int sortPrio;
         public final String display;

@@ -3,7 +3,10 @@ package fr.thejordan.historyland.helper;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -88,4 +91,26 @@ public class Helper {
             return false;
         }
     }
+
+    public static UUID uuidWithSeed(String seed) {
+        return UUID.nameUUIDFromBytes(seed.getBytes());
+    }
+
+    public static ItemStack removeAllEnchants(ItemStack itemStack) {
+        ItemStack s = itemStack.clone();
+        for (Enchantment enchantment : itemStack.getEnchantments().keySet()) {
+            s.removeEnchantment(enchantment);
+        }
+        return s;
+    }
+
+    public static Optional<String> isStringURL(String _url) {
+        try {
+            new java.net.URL(_url);
+            return Optional.of(_url);
+        } catch (MalformedURLException e) {
+            return Optional.empty();
+        }
+    }
+
 }

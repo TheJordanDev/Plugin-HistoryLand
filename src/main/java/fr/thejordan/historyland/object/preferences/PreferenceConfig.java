@@ -3,10 +3,10 @@ package fr.thejordan.historyland.object.preferences;
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.helper.TT;
 import fr.thejordan.historyland.object.AbstractConfigFolder;
+import fr.thejordan.historyland.object.Pair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import oshi.util.tuples.Pair;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +54,7 @@ public class PreferenceConfig extends AbstractConfigFolder<PlayerPreferences> {
                     .map(entry -> {
                         Preference preference = Preference.valueOf(entry.getKey());
                         return new Pair<>(preference, entry.getValue());
-                    }).collect(Collectors.toMap(Pair::getA, Pair::getB));
+                    }).collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
             return new PlayerPreferences(uuid, preferences);
         };
     }

@@ -26,7 +26,7 @@ public class WarpListGUI extends AbstractGUI {
 
     @Override
     public String title() {
-        return "§a"+Translator.translate(getPlayer(),"warplist.title");
+        return "§a"+Translator.translate(getPlayer(),"menu_warplist_title");
     }
 
     @Override

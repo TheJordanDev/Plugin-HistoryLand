@@ -19,9 +19,12 @@ import java.util.List;
 
 public class SeatManager extends AbstractManager {
 
+    private static SeatManager instance;
+    public static SeatManager instance() { return instance; }
 
     public SeatManager(JavaPlugin plugin) {
         super(plugin);
+        instance = this;
     }
 
     @Override

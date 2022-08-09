@@ -11,6 +11,7 @@ public class Keys {
     //COLLECTIBLES
     public static final NamespacedKey COLLECTIBLE_KEY = new NamespacedKey(Historyland.instance(), "collectible");
     public static final NamespacedKey CUSTOM_ARMOR_KEY = new NamespacedKey(Historyland.instance(), "armor");
+    public static final NamespacedKey COLLECTIBLE_FILTER_KEY = new NamespacedKey(Historyland.instance(), "menu_collectible_filter");
 
     //SHOP
     public static final NamespacedKey SHOP_ITEM_KEY = new NamespacedKey(Historyland.instance(), "shopItem");
