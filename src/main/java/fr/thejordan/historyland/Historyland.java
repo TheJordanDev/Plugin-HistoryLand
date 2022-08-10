@@ -10,7 +10,7 @@ import java.util.logging.Level;
 
 public final class Historyland extends JavaPlugin {
 
-    public static final String PREFIX = "[HistoryLand] ";
+    //public static final String PREFIX = "[HistoryLand] ";
     public static final String GAME_PREFIX = "§6[§eHistoryLand§6] ";
 
     private static Historyland instance;
@@ -18,9 +18,9 @@ public final class Historyland extends JavaPlugin {
 
     private List<? extends AbstractManager> managers;
 
-    public static void log(Object msg) { instance.getLogger().log(Level.INFO, PREFIX+msg.toString()); }
-    public static void wrn(Object msg) { instance.getLogger().log(Level.WARNING, PREFIX+msg.toString()); }
-    public static void err(Object msg) { instance.getLogger().log(Level.SEVERE, PREFIX+msg.toString()); }
+    public static void log(Object msg) { instance.getLogger().log(Level.INFO, msg.toString()); }
+    public static void wrn(Object msg) { instance.getLogger().log(Level.WARNING, msg.toString()); }
+    public static void err(Object msg) { instance.getLogger().log(Level.SEVERE, msg.toString()); }
 
     @Override
     public void onEnable() {

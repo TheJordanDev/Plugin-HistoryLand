@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class ShopItem extends Collectible {
 
@@ -54,23 +55,20 @@ public class ShopItem extends Collectible {
     public void buy(Player player) {
         User user = MainManager.instance().essentials().getUser(player);
         if (CollectibleManager.ownes(player,this)) {
-            player.sendMessage(Translator.translate("shop_already_bought",player).replaceAll("%item%",getName()));
+            Translator.send(player,"shop_already_bought", Map.of("item",getName()));
             return;
         }
         if (user.getMoney().doubleValue() >= price) {
             try {
                 user.setMoney(BigDecimal.valueOf(user.getMoney().doubleValue()-price));
-                player.sendMessage(
-                        Translator.translate("shop_purchase_successful", player)
-                                .replaceAll("%amount%",""+getAmount())
-                                .replaceAll("%item%",getName())
-                );
+                Translator.send(player,"shop_purchase_successful",
+                        Map.of("amount",""+getAmount(),"item",getName()));
                 CollectibleManager.add(player.getUniqueId(),toCollectible());
             } catch (MaxMoneyException e) {
-                player.sendMessage(Translator.translate("shop_purchase_error",player));
+                Translator.send(player,"shop_purchase_error");
             }
         } else {
-            player.sendMessage(Translator.translate("shop_purchase_not_enough_found",player));
+            Translator.send(player,"shop_purchase_not_enough_found");
         }
     }
 

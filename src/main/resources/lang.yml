@@ -4,6 +4,9 @@ skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQub
 strings:
   error: "§cERROR: Unknown Message '%code%'"
   activity_gift_message: "§aYou have been given %amount% %currency% for being online !"
+  welcome_message: "§6[§r§eHistory Land§l§6] §r§fWelcome back %player !"
+  first_join_welcome_message: "§6[§r§eHistory Land§l§6] §r§fNice to mee you, %player% !"
+  leave_message: "§6[§r§eHistory Land§l§6] See you next time §r§f%player% !"
   #GUI
   gui_next: "§7§lNext"
   gui_previous: "§7§lPrevious"
@@ -17,8 +20,8 @@ strings:
   resourcepack_sent: "§aOur resourcepack was sent to you !"
   resourcepack_accepted: "§aThank you for downloading our resource pack !"
   resourcepack_loaded: "§eResource Pack loaded successfully !"
-  resourcepack_declined: "§4§l[WARNING]§r \n§cYou must allow the server's resource pack !§r \n§6Use /resourcepack to retry."
-  resourcepack_failed: "§4§l[WARNING]§r \n§cThe resource pack's download failed !§r \n§6Use /resourcepack to retry."
+  resourcepack_declined: "§4§l[WARNING]§r \n§cYou must allow the server's resource pack !"
+  resourcepack_failed: "§4§l[WARNING]§r \n§cThe resource pack's download failed !"
   resourcepack_bypassed: "§aYou chose to not receive the resource pack !\n§6If you ever need it just do /resourcepack."
   resourcepack_updated: "§eThe resource pack changed. We are sending you the new one."
   resourcepack_updated_bypass: "§6The resource pack changed. But you are immune, nice !"
@@ -28,9 +31,10 @@ strings:
   resourcepack_edited: "§aResource pack edited !"
   resourcepack_not_valid: "§cThe resource pack is not valid, please contact an admin !"
   #SEAT
-  sit_seated: "§2You are now seated."
-  sit_already: "§2You are already seated."
-  sit_someone_already: "§cSomeone is already seated here !"
+  seat_now_seated: "§2You are now seated."
+  seat_already_sit: "§2You are already seated."
+  seat_someone_already: "§cSomeone is already seated here !"
+  seat_too_far: "§cYou are too far away from the seat !"
   #SHOP
   menu_shop_title: "§6§lShop §7§l- §a§l%shop%"
   shop_already_bought: "§cYou already have '§6§l%item%§c' !"

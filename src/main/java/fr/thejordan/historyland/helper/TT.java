@@ -13,19 +13,28 @@ public class TT {
             double x = location.getX();
             double y = location.getY();
             double z = location.getZ();
+            float yaw = location.getYaw();
+            float pitch = location.getPitch();
             String world = location.getWorld().getName();
-            return String.format("%f|%f|%f|%s", x, y, z, world);
+            return String.format("%.2f;%.2f;%.2f;%.2f;%.2f;%s", x, y, z, yaw, pitch, world);
         }
 
         public static org.bukkit.Location location(String string) {
             String[] split = string.split(";");
-            double x = Double.parseDouble(split[0]);
-            double y = Double.parseDouble(split[1]);
-            double z = Double.parseDouble(split[2]);
-            String world = split[3];
+            double x = Float.parseFloat(split[0].replace(",", "."));
+            double y = Float.parseFloat(split[1].replace(",", "."));
+            double z = Float.parseFloat(split[2].replace(",", "."));
+            float yaw = 0F;
+            float pitch = 0F;
+            String world;
+            if (split.length == 6) {
+                yaw = Float.parseFloat(split[3].replace(",", "."));
+                pitch = Float.parseFloat(split[4].replace(",", "."));
+                world = split[5];
+            } else world = split[3];
             World bukkitWorld = Bukkit.getWorld(world);
             if (bukkitWorld == null) bukkitWorld = Bukkit.getWorlds().get(0);
-            return new org.bukkit.Location(bukkitWorld, x, y, z);
+            return new org.bukkit.Location(bukkitWorld, x, y, z, yaw, pitch);
         }
 
     }

@@ -3,8 +3,11 @@ package fr.thejordan.historyland.helper;
 import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Stairs;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -113,4 +116,28 @@ public class Helper {
         }
     }
 
+    public static float getYawComplex(BlockFace b) {
+        if (b == BlockFace.NORTH) return 180F;
+        else if (b == BlockFace.EAST) return -90F;
+        else if (b == BlockFace.SOUTH) return 0F;
+        else if (b == BlockFace.WEST) return 90F;
+        else return 0F;
+    }
+
+    public static Vector getStairDirection(Stairs stair) {
+        Stairs.Shape shape = stair.getShape();
+        BlockFace face = stair.getFacing().getOppositeFace();
+        if (shape == Stairs.Shape.STRAIGHT) return face.getDirection().multiply(0.3);
+        else return new Vector(0, 0, 0);
+    }
+
+    public static float getYawFromStair(Stairs stair) {
+        Stairs.Shape shape = stair.getShape();
+        BlockFace face = stair.getFacing().getOppositeFace();
+        if (shape == Stairs.Shape.STRAIGHT) return getYawComplex(face);
+        float offset;
+        if (shape.name().endsWith("_LEFT")) offset = -45F;
+        else offset = 45F;
+        return getYawComplex(face)+ offset;
+    }
 }

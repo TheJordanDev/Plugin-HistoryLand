@@ -1,5 +1,6 @@
 package fr.thejordan.historyland.manager;
 
+import fr.thejordan.historyland.Historyland;
 import fr.thejordan.historyland.command.ResourcePackCommand;
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.object.AbstractCommand;
@@ -10,16 +11,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerResourcePackStatusEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ResourcePackManager extends AbstractManager {
 
     private static ResourcePackManager instance;
     public static ResourcePackManager instance() { return instance; }
+
+    private Map<UUID, String> joinRequest = new HashMap<>();
+    public Map<UUID, String> getJoinRequest() { return joinRequest; }
+
+    private List<UUID> kickedForResourcepack = new ArrayList<>();
+    public List<UUID> getKickedForResourcepack() { return kickedForResourcepack; }
 
     private List<UUID> bypassList;
     public List<UUID> getBypassList() { return bypassList; }
@@ -36,6 +43,12 @@ public class ResourcePackManager extends AbstractManager {
     @Override
     public void onEnable() {
         super.onEnable();
+        this.bypassList = this.bypassResourcePackConfig.load();
+    }
+
+    @Override
+    public void onReload() {
+        super.onReload();
         this.bypassList = this.bypassResourcePackConfig.load();
     }
 
@@ -59,6 +72,12 @@ public class ResourcePackManager extends AbstractManager {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         sendPack(player, true);
+        if (bypassList.contains(player.getUniqueId()))
+            event.setJoinMessage("§6[§r§eHistory Land§l§6] §r§fBienvenue "+player.getName());
+        else {
+            joinRequest.put(player.getUniqueId(), (player.hasPlayedBefore()) ? "welcome_message" : "first_join_welcome_message");
+            event.setJoinMessage("");
+        }
     }
 
     public boolean sendPack(Player player, boolean checkBypass) {
@@ -82,11 +101,40 @@ public class ResourcePackManager extends AbstractManager {
         PlayerResourcePackStatusEvent.Status status = event.getStatus();
         switch (status) {
             case ACCEPTED -> player.sendMessage(Translator.translate(player,"resourcepack_accepted"));
-            case SUCCESSFULLY_LOADED -> player.sendMessage(Translator.translate(player,"resourcepack_loaded"));
-            case FAILED_DOWNLOAD -> player.sendMessage(Translator.translate(player,"resourcepack_failed"));
-            case DECLINED -> player.sendMessage(Translator.translate(player,"resourcepack_declined"));
+            case SUCCESSFULLY_LOADED -> {
+                player.sendMessage(Translator.translate(player,"resourcepack_loaded"));
+                if (joinRequest.containsKey(player.getUniqueId())) {
+                    String message = joinRequest.remove(player.getUniqueId());
+                    Translator.broadcast(message, Map.of("player", player.getName()),Collections.emptyList());
+                    Historyland.log("[+] "+player.getName());
+                }
+            }
+            case FAILED_DOWNLOAD -> {
+                if (bypassList.contains(player.getUniqueId()) || player.isOp()) player.sendMessage(Translator.translate(player, "resourcepack_failed"));
+                else {
+                    kickedForResourcepack.add(player.getUniqueId());
+                    player.kickPlayer(Translator.translate(player, "resourcepack_failed"));
+                }
+            }
+            case DECLINED -> {
+                if (bypassList.contains(player.getUniqueId()) || player.isOp()) player.sendMessage(Translator.translate(player, "resourcepack_declined"));
+                else {
+                    kickedForResourcepack.add(player.getUniqueId());
+                    player.kickPlayer(Translator.translate(player, "resourcepack_declined"));
+                }
+            }
         }
     }
 
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        event.setQuitMessage("");
+        Player player = event.getPlayer();
+        if (!kickedForResourcepack.contains(player.getUniqueId())) {
+            Translator.broadcast("leave_message", Map.of("player", player.getName()), Collections.emptyList());
+            Historyland.log("[-] " + player.getName());
+        }
+        kickedForResourcepack.remove(player.getUniqueId());
+    }
 
 }

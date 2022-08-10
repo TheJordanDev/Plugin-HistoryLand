@@ -3,7 +3,6 @@ package fr.thejordan.historyland.manager;
 import com.earth2me.essentials.Essentials;
 import fr.thejordan.historyland.command.BroadcastCommand;
 import fr.thejordan.historyland.command.ReloadCommand;
-import fr.thejordan.historyland.command.SitCommand;
 import fr.thejordan.historyland.object.AbstractCommand;
 import fr.thejordan.historyland.object.AbstractManager;
 import fr.thejordan.historyland.object.MainData;
@@ -79,7 +78,6 @@ public class MainManager extends AbstractManager {
     @Override
     public List<AbstractCommand> commands() {
         return List.of(
-                new SitCommand(),
                 new BroadcastCommand(),
                 new ReloadCommand()
         );
@@ -105,12 +103,11 @@ public class MainManager extends AbstractManager {
     @EventHandler
     public void onInspect(PlayerInteractEvent event) {
         if (event.getHand() != EquipmentSlot.HAND) return;
-        if (event.getAction().name().startsWith("RIGHT_CLICK")) return;
+        if (!event.getAction().name().startsWith("RIGHT_CLICK")) return;
         Player player = event.getPlayer();
         ItemStack stack = player.getInventory().getItemInMainHand();
         if (stack == null) return;
         if (stack.getType() != Material.KNOWLEDGE_BOOK) return;
-        player.setCooldown(Material.AIR,309);
     }
 
 }

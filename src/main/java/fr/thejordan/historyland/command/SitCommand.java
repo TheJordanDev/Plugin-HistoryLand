@@ -1,8 +1,10 @@
 package fr.thejordan.historyland.command;
 
+import fr.thejordan.historyland.manager.SeatManager;
 import fr.thejordan.historyland.object.AbstractCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -28,7 +30,8 @@ public class SitCommand extends AbstractCommand {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        //TODO: SIT
+        if (!(sender instanceof Player player)) return sendMessageF(sender, "You must be a player to use this command.");
+        SeatManager.instance().sit(player);
         return true;
     }
 
