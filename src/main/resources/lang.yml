@@ -4,9 +4,9 @@ skin: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQub
 strings:
   error: "§cERROR: Unknown Message '%code%'"
   activity_gift_message: "§aYou have been given %amount% %currency% for being online !"
-  welcome_message: "§6[§r§eHistory Land§l§6] §r§fWelcome back %player !"
+  welcome_message: "§6[§r§eHistory Land§l§6] §r§fWelcome back %player% !"
   first_join_welcome_message: "§6[§r§eHistory Land§l§6] §r§fNice to mee you, %player% !"
-  leave_message: "§6[§r§eHistory Land§l§6] See you next time §r§f%player% !"
+  leave_message: "§6[§r§eHistory Land§l§6] §r§fSee you next time %player% !"
   #GUI
   gui_next: "§7§lNext"
   gui_previous: "§7§lPrevious"
@@ -57,7 +57,7 @@ strings:
   menu_collectible_not_equipped: "§6§l☐ Not Equipped"
   #PREFERENCES
   menu_preferences_title: "§dYour preferences"
-  preferences_show_gift_message: "§aShow Reward Message"
+  preferences_show_gift_message: "Show Reward Message"
   #WARPS
   menu_warplist_title: "Warps"
   menu_warptp_title: "Warps of %list%"

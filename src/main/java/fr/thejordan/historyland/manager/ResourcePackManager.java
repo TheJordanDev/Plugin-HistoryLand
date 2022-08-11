@@ -7,6 +7,7 @@ import fr.thejordan.historyland.object.AbstractCommand;
 import fr.thejordan.historyland.object.AbstractManager;
 import fr.thejordan.historyland.object.Translator;
 import fr.thejordan.historyland.object.resourcepack.BypassResourcePackConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -55,6 +56,7 @@ public class ResourcePackManager extends AbstractManager {
     @Override
     public void onDisable() {
         super.onDisable();
+        Historyland.log("ONDISABLE");
         this.bypassResourcePackConfig.save(getBypassList());
     }
 
@@ -81,9 +83,10 @@ public class ResourcePackManager extends AbstractManager {
     }
 
     public boolean sendPack(Player player, boolean checkBypass) {
-        if (checkBypass && this.bypassList.contains(player.getUniqueId()))
-            player.sendMessage(Translator.translate(player,"resourcepack_bypassed"));
-        else {
+        if (checkBypass && this.bypassList.contains(player.getUniqueId())) {
+            Historyland.log("[+] " + player.getName());
+            player.sendMessage(Translator.translate(player, "resourcepack_bypassed"));
+        } else {
             String url = MainManager.instance().data().resourcePackUrl();
             if (url.isBlank() || Helper.isStringURL(url).isEmpty())
                 player.sendMessage(Translator.translate(player,"resourcepack_not_valid"));
@@ -137,4 +140,14 @@ public class ResourcePackManager extends AbstractManager {
         kickedForResourcepack.remove(player.getUniqueId());
     }
 
+    public void setPack(String s) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (getBypassList().contains(player.getUniqueId()))
+                Translator.send(player, "resourcepack_updated_bypass");
+            else {
+                Translator.send(player, "resourcepack_updated");
+                Helper.runnable(()-> player.setResourcePack(s)).runTaskLater(Historyland.instance(),20L);
+            }
+        }
+    }
 }

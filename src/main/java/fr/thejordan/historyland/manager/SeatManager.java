@@ -81,7 +81,6 @@ public class SeatManager extends AbstractManager {
         BlockData bData = player.getLocation().getBlock().getBlockData();
         if (bData instanceof Stairs || bData instanceof Slab) used = player.getLocation().getBlock();
         else used = player.getLocation().getBlock().getRelative(BlockFace.DOWN);
-        Translator.send(player, "seat_now_seated");
         createSeat(player, used);
     }
 
@@ -120,10 +119,10 @@ public class SeatManager extends AbstractManager {
         if (block.getType() != Material.CHIPPED_ANVIL) return;
         event.setUseInteractedBlock(Event.Result.DENY);
         event.setUseItemInHand(Event.Result.DENY);
-        if (block.getLocation().distance(player.getLocation()) > 2.5) Translator.send(player, "seat_too_far");
-        if (player.getVehicle() != null) Translator.send(player,"seat_already_sit");
+        if (block.getLocation().distance(player.getLocation()) > 4) Translator.send(player, "seat_too_far");
+        else if (player.getVehicle() != null) Translator.send(player,"seat_already_sit");
         else if (used().containsKey(block.getLocation())) Translator.send(player, "seat_someone_already");
-        else { createSeat(player, block); Translator.send(player, "seat_now_seated"); }
+        else createSeat(player, block);
     }
 
     @EventHandler

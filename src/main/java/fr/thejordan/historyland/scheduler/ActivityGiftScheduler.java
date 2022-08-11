@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Map;
 
 public class ActivityGiftScheduler extends BukkitRunnable {
 
@@ -40,11 +41,12 @@ public class ActivityGiftScheduler extends BukkitRunnable {
                 );
                 } catch (MaxMoneyException ignored) {}
                 boolean showMessage = (boolean) PreferencesManager.instance().getPreference(player.getUniqueId(), Preference.SHOW_ACTIVITY_REWARD);
-                if (showMessage)
-                    player.sendMessage(Translator.translate(player,"activity_gift_message")
-                        .replace("%amount%", String.valueOf(MainManager.instance().data().activityGiftAmount()))
-                        .replace("%currency%", MainManager.instance().data().currency())
-                    );
+                if (showMessage) {
+                    double amount = MainManager.instance().data().activityGiftAmount();
+                    String currency = MainManager.instance().data().currency();
+                    Translator.send(player, "activity_gift_message",
+                            Map.of("amount", String.valueOf(amount), "currency", currency));
+                }
             }
         }
     }

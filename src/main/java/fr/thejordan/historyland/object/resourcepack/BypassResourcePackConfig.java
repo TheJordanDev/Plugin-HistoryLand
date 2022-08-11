@@ -6,7 +6,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -32,8 +31,7 @@ public class BypassResourcePackConfig extends AbstractConfigFile<List<UUID>> {
     @Override
     public Function<YamlConfiguration, List<UUID>> loadProcess() {
         return (config) -> {
-            List<UUID> players = new ArrayList<>();
-            config.getStringList("players")
+            List<UUID> players = config.getStringList("players")
                     .stream().map(TT.UUID::uuid)
                     .collect(Collectors.toList());
             return players;
@@ -42,8 +40,6 @@ public class BypassResourcePackConfig extends AbstractConfigFile<List<UUID>> {
 
     @Override
     public Consumer<List<UUID>> saveProcess(YamlConfiguration configuration) {
-        return (config)-> {
-            configuration.set("players", config.stream().map(TT.UUID::string).collect(Collectors.toList()));
-        };
+        return (config)-> configuration.set("players", config.stream().map(TT.UUID::string).collect(Collectors.toList()));
     }
 }

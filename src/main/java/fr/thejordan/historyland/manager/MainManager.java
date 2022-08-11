@@ -9,13 +9,13 @@ import fr.thejordan.historyland.object.MainData;
 import fr.thejordan.historyland.scheduler.ActivityGiftScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerCommandSendEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -108,6 +108,35 @@ public class MainManager extends AbstractManager {
         ItemStack stack = player.getInventory().getItemInMainHand();
         if (stack == null) return;
         if (stack.getType() != Material.KNOWLEDGE_BOOK) return;
+    }
+
+    @EventHandler
+    public void onFlowerPotInteract(PlayerInteractEvent event) {
+        if (event.getHand() != EquipmentSlot.HAND) return;
+        if (!event.getAction().name().startsWith("RIGHT_CLICK")) return;
+        if (!event.hasBlock()) return;
+        if (event.getPlayer().isOp()) return;
+        Material mat = event.getClickedBlock().getType();
+        if (mat == Material.FLOWER_POT || mat.name().startsWith("POTTED_")) {
+            event.setUseInteractedBlock(Event.Result.DENY);
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onItemFrameInteract(PlayerInteractEntityEvent event) {
+        if (!(event.getRightClicked() instanceof ItemFrame)) return;
+        Player player = event.getPlayer();
+        if (player.isOp()) return;
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onItemFramePop(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof ItemFrame)) return;
+        if (!(event.getDamager() instanceof Player player)) return;
+        if (player.isOp()) return;
+        event.setCancelled(true);
     }
 
 }

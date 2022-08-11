@@ -3,6 +3,7 @@ package fr.thejordan.historyland.manager;
 import fr.thejordan.historyland.object.AbstractCommand;
 import fr.thejordan.historyland.object.AbstractGUI;
 import fr.thejordan.historyland.object.AbstractManager;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -54,6 +55,7 @@ public class GUIManager extends AbstractManager {
         AbstractGUI inventory = guis().get(event.getWhoClicked().getUniqueId());
         if (inventory == null) return;
         if (event.getSlotType().equals(InventoryType.SlotType.OUTSIDE)) return;
+        event.setResult(Event.Result.DENY);
         event.setCancelled(true);
         inventory.onClick(event);
     }

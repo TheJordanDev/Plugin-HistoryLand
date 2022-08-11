@@ -7,6 +7,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.net.MalformedURLException;
@@ -139,5 +140,12 @@ public class Helper {
         if (shape.name().endsWith("_LEFT")) offset = -45F;
         else offset = 45F;
         return getYawComplex(face)+ offset;
+    }
+
+    public static BukkitRunnable runnable(Runnable runnable) {
+        return new BukkitRunnable() {
+            @Override
+            public void run() { runnable.run(); }
+        };
     }
 }

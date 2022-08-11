@@ -40,12 +40,12 @@ public abstract class AbstractCommand implements CommandExecutor, TabCompleter {
         return new ArrayList<>();
     }
 
-    public boolean sendMessageT(CommandSender sender, String message) {
+    public boolean sendMessageT(CommandSender sender, String... message) {
         sender.sendMessage(message);
         return true;
     }
 
-    public boolean sendMessageF(CommandSender sender, String message) {
+    public boolean sendMessageF(CommandSender sender, String... message) {
         sender.sendMessage(message);
         return true;
     }

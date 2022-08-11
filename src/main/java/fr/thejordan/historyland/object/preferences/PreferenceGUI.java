@@ -31,7 +31,7 @@ public class PreferenceGUI extends AbstractPagedGUI {
 
     @Override
     public String title() {
-        return Translator.translate(getPlayer(),"preferences_title");
+        return Translator.translate(getPlayer(),"menu_preferences_title");
     }
 
     @Override
