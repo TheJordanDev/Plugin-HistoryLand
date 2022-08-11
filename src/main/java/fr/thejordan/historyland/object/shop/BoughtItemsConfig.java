@@ -2,8 +2,8 @@ package fr.thejordan.historyland.object.shop;
 
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.helper.TT;
-import fr.thejordan.historyland.object.AbstractConfigFolder;
 import fr.thejordan.historyland.object.collectible.PlayersItems;
+import fr.thejordan.historyland.object.common.AbstractConfigFolder;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 

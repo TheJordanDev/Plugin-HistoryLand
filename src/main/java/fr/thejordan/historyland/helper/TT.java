@@ -40,15 +40,15 @@ public class TT {
     }
     public static class Skin {
 
-        public static String string(fr.thejordan.historyland.object.Skin skin) {
+        public static String string(fr.thejordan.historyland.object.common.Skin skin) {
             return skin.getTexture() + "|" + skin.getSignature();
         }
 
-        public static fr.thejordan.historyland.object.Skin skin(String string) {
+        public static fr.thejordan.historyland.object.common.Skin skin(String string) {
             if (string.contains("|")) {
                 String[] split = string.split("\\|");
-                return new fr.thejordan.historyland.object.Skin(split[0], split[1]);
-            } else return new fr.thejordan.historyland.object.Skin(string);
+                return new fr.thejordan.historyland.object.common.Skin(split[0], split[1]);
+            } else return new fr.thejordan.historyland.object.common.Skin(string);
         }
 
     }

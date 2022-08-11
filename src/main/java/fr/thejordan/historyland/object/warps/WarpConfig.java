@@ -3,7 +3,7 @@ package fr.thejordan.historyland.object.warps;
 import fr.thejordan.historyland.helper.FileHelper;
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.helper.TT;
-import fr.thejordan.historyland.object.AbstractConfigFile;
+import fr.thejordan.historyland.object.common.AbstractConfigFile;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

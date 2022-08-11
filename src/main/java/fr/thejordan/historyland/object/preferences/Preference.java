@@ -1,8 +1,8 @@
 package fr.thejordan.historyland.object.preferences;
 
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
-import fr.thejordan.historyland.object.Translator;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
+import fr.thejordan.historyland.object.common.Translator;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -23,7 +23,7 @@ public enum Preference {
     }
 
     public ItemStack toItem(Player player, boolean state) {
-        return BItem.of((state)? Material.GREEN_STAINED_GLASS_PANE : Material.RED_STAINED_GLASS_PANE)
+        return BItem.of((state)? Material.ENDER_EYE : Material.ENDER_PEARL)
                 .displayName(((state)?"§a✔":"§c✖")+" "+Translator.translate(player, key))
                 .sData(Keys.PREFERENCE_KEY, PersistentDataType.STRING, key).stack();
     }

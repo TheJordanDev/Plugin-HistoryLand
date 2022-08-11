@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import fr.thejordan.historyland.Historyland;
 import lombok.Getter;

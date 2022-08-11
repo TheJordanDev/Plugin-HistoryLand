@@ -1,9 +1,9 @@
 package fr.thejordan.historyland.object.language;
 
 import fr.thejordan.historyland.helper.TT;
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
-import fr.thejordan.historyland.object.Skin;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
+import fr.thejordan.historyland.object.common.Skin;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;

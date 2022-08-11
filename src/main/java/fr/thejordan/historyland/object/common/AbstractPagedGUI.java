@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import lombok.Getter;
 import org.bukkit.entity.Player;

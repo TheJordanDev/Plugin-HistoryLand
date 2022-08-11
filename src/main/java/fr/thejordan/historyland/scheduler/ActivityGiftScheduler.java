@@ -2,17 +2,20 @@ package fr.thejordan.historyland.scheduler;
 
 import com.earth2me.essentials.User;
 import fr.thejordan.historyland.Historyland;
+import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.manager.MainManager;
 import fr.thejordan.historyland.manager.PreferencesManager;
-import fr.thejordan.historyland.object.Translator;
+import fr.thejordan.historyland.object.common.Translator;
 import fr.thejordan.historyland.object.preferences.Preference;
 import net.ess3.api.MaxMoneyException;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 public class ActivityGiftScheduler extends BukkitRunnable {
@@ -44,8 +47,12 @@ public class ActivityGiftScheduler extends BukkitRunnable {
                 if (showMessage) {
                     double amount = MainManager.instance().data().activityGiftAmount();
                     String currency = MainManager.instance().data().currency();
-                    Translator.send(player, "activity_gift_message",
+                    String message = Translator.translate(player, "activity_gift_message",
                             Map.of("amount", String.valueOf(amount), "currency", currency));
+                    String tooltip = Translator.translate(player, "click_to_open_preferences");
+                    ComponentBuilder navBar = new ComponentBuilder();
+                    Helper.addHoverCommandMessage(navBar, message, "/preferences", List.of(tooltip));
+                    player.spigot().sendMessage(navBar.create());
                 }
             }
         }

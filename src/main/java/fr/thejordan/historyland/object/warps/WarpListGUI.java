@@ -1,10 +1,10 @@
 package fr.thejordan.historyland.object.warps;
 
 import fr.thejordan.historyland.manager.WarpManager;
-import fr.thejordan.historyland.object.AbstractGUI;
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
-import fr.thejordan.historyland.object.Translator;
+import fr.thejordan.historyland.object.common.AbstractGUI;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
+import fr.thejordan.historyland.object.common.Translator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;

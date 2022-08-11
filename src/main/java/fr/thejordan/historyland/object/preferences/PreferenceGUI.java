@@ -1,7 +1,7 @@
 package fr.thejordan.historyland.object.preferences;
 
 import fr.thejordan.historyland.manager.PreferencesManager;
-import fr.thejordan.historyland.object.*;
+import fr.thejordan.historyland.object.common.*;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

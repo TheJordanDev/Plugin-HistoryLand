@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import java.util.AbstractList;
 import java.util.ArrayList;

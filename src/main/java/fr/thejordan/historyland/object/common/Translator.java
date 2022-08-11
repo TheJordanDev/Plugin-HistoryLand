@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import fr.thejordan.historyland.manager.LanguageManager;
 import org.bukkit.Bukkit;

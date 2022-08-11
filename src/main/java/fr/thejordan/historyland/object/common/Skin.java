@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;

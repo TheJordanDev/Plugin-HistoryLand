@@ -1,10 +1,10 @@
 package fr.thejordan.historyland.object.language;
 
 import fr.thejordan.historyland.manager.LanguageManager;
-import fr.thejordan.historyland.object.AbstractGUI;
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
-import fr.thejordan.historyland.object.Translator;
+import fr.thejordan.historyland.object.common.AbstractGUI;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
+import fr.thejordan.historyland.object.common.Translator;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

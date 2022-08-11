@@ -1,8 +1,8 @@
 package fr.thejordan.historyland.manager;
 
 import fr.thejordan.historyland.command.PreferencesCommand;
-import fr.thejordan.historyland.object.AbstractCommand;
-import fr.thejordan.historyland.object.AbstractManager;
+import fr.thejordan.historyland.object.common.AbstractCommand;
+import fr.thejordan.historyland.object.common.AbstractManager;
 import fr.thejordan.historyland.object.preferences.PlayerPreferences;
 import fr.thejordan.historyland.object.preferences.Preference;
 import fr.thejordan.historyland.object.preferences.PreferenceConfig;

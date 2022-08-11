@@ -1,7 +1,7 @@
 package fr.thejordan.historyland.object.warps;
 
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
 import lombok.Getter;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;

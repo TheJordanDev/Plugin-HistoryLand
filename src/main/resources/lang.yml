@@ -57,6 +57,7 @@ strings:
   menu_collectible_not_equipped: "§6§l☐ Not Equipped"
   #PREFERENCES
   menu_preferences_title: "§dYour preferences"
+  click_to_open_preferences: "§dClick to open your preferences"
   preferences_show_gift_message: "Show Reward Message"
   #WARPS
   menu_warplist_title: "Warps"

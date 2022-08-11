@@ -20,6 +20,9 @@ commands:
   language:
   hwarps:
   hbroadcast:
+  light:
+    aliases: [lgt]
+  jet:
   hreload:
     aliases: [hrl]
   preferences:

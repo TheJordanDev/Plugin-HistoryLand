@@ -2,8 +2,8 @@ package fr.thejordan.historyland.object.preferences;
 
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.helper.TT;
-import fr.thejordan.historyland.object.AbstractConfigFolder;
-import fr.thejordan.historyland.object.Pair;
+import fr.thejordan.historyland.object.common.AbstractConfigFolder;
+import fr.thejordan.historyland.object.common.Pair;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;

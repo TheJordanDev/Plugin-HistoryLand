@@ -2,7 +2,7 @@ package fr.thejordan.historyland.object.collectible;
 
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.manager.CollectibleManager;
-import fr.thejordan.historyland.object.*;
+import fr.thejordan.historyland.object.common.*;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -60,10 +60,10 @@ public class CollectibleGUI extends AbstractPagedGUI {
             for (int i = 0; i < collectibles.size(); i++) {
                 ItemStack stack = collectibles.get(i).toItemStack();
                 BItem item = BItem.of(stack);
-                if (new Armor(getPlayer()).wearsItem(stack)) item.glow().prefix("§a§l☑ ");
+                if (new Armor(getPlayer()).wearsItem(stack)) item.glow();
                 slots.put(i, item.stack());
             }
-            if (getPage() > 1) slots.put(48,Items.prevArrow(getPlayer()));
+            if (getPage() > 1) slots.put(48, Items.prevArrow(getPlayer()));
             slots.put(49, Items.collectibleFilter(getPlayer(),type));
             if (pages.size() > 1 && pages.size() >= getPage()) slots.put(50, Items.nextArrow(getPlayer()));
         }

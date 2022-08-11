@@ -1,8 +1,8 @@
 package fr.thejordan.historyland.manager;
 
-import fr.thejordan.historyland.object.AbstractCommand;
-import fr.thejordan.historyland.object.AbstractGUI;
-import fr.thejordan.historyland.object.AbstractManager;
+import fr.thejordan.historyland.object.common.AbstractCommand;
+import fr.thejordan.historyland.object.common.AbstractGUI;
+import fr.thejordan.historyland.object.common.AbstractManager;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

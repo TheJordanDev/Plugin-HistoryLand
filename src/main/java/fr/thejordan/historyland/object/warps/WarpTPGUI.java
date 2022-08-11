@@ -1,6 +1,6 @@
 package fr.thejordan.historyland.object.warps;
 
-import fr.thejordan.historyland.object.*;
+import fr.thejordan.historyland.object.common.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -27,7 +27,7 @@ public class WarpTPGUI extends AbstractPagedGUI {
 
     @Override
     public String title() {
-        return "§a"+Translator.translate(getPlayer(),"menu_warptp_title")
+        return "§a"+ Translator.translate(getPlayer(),"menu_warptp_title")
                 .replace("%list%", BItem.of(parent.getIcon()).displayName());
     }
 
@@ -47,7 +47,7 @@ public class WarpTPGUI extends AbstractPagedGUI {
             for (Map.Entry<Integer, Warp> entry : pages.get(getPage()).entrySet())
                 slots.put(entry.getKey(), entry.getValue().icon());
         if (isMultiPage()) {
-            if (getPage() > 1) slots.put(30,Items.prevArrow(getPlayer()));
+            if (getPage() > 1) slots.put(30, Items.prevArrow(getPlayer()));
             if (getPage() < pages.size()) slots.put(32,Items.nextArrow(getPlayer()));
         }
         slots.put(31, Items.backArrow(getPlayer()));

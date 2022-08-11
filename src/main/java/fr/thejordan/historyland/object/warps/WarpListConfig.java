@@ -1,7 +1,7 @@
 package fr.thejordan.historyland.object.warps;
 
-import fr.thejordan.historyland.object.AbstractConfigFile;
-import fr.thejordan.historyland.object.BItem;
+import fr.thejordan.historyland.object.common.AbstractConfigFile;
+import fr.thejordan.historyland.object.common.BItem;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import org.bukkit.command.*;
 import org.bukkit.plugin.java.JavaPlugin;

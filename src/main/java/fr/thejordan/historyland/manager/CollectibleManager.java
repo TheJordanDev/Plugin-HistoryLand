@@ -2,13 +2,13 @@ package fr.thejordan.historyland.manager;
 
 import fr.thejordan.historyland.command.CollectiblesCommand;
 import fr.thejordan.historyland.helper.FileHelper;
-import fr.thejordan.historyland.object.AbstractCommand;
-import fr.thejordan.historyland.object.AbstractManager;
-import fr.thejordan.historyland.object.BItem;
-import fr.thejordan.historyland.object.Keys;
 import fr.thejordan.historyland.object.collectible.Collectible;
 import fr.thejordan.historyland.object.collectible.CollectibleConfig;
 import fr.thejordan.historyland.object.collectible.PlayersItems;
+import fr.thejordan.historyland.object.common.AbstractCommand;
+import fr.thejordan.historyland.object.common.AbstractManager;
+import fr.thejordan.historyland.object.common.BItem;
+import fr.thejordan.historyland.object.common.Keys;
 import fr.thejordan.historyland.object.shop.BoughtItemsConfig;
 import lombok.Getter;
 import org.bukkit.Material;

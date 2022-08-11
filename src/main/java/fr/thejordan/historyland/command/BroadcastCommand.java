@@ -3,7 +3,7 @@ package fr.thejordan.historyland.command;
 import fr.thejordan.historyland.Historyland;
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.manager.LanguageManager;
-import fr.thejordan.historyland.object.AbstractCommand;
+import fr.thejordan.historyland.object.common.AbstractCommand;
 import fr.thejordan.historyland.object.language.Language;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

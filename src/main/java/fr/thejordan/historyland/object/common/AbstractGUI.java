@@ -1,4 +1,4 @@
-package fr.thejordan.historyland.object;
+package fr.thejordan.historyland.object.common;
 
 import fr.thejordan.historyland.manager.GUIManager;
 import lombok.Getter;
@@ -39,8 +39,8 @@ public abstract class AbstractGUI {
         this.inventory = Bukkit.createInventory(
                 new GUIHolder(id()), rows() * 9, title()
         );
-        refresh();
         player.openInventory(inventory);
+        refresh();
         GUIManager.instance().guis().put(player.getUniqueId(), this);
     }
 

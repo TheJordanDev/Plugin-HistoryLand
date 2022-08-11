@@ -1,8 +1,11 @@
 name: DefaultShop
 items:
   '0':
-    id: test_item
+    id: off_item
     price: 10.0
   '1':
-    id: test_item
+    id: head_item
+    price: 10.0
+  '2':
+    id: chest_item
     price: 10.0

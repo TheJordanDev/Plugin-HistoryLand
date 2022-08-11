@@ -1,6 +1,6 @@
 package fr.thejordan.historyland.object.shop;
 
-import fr.thejordan.historyland.object.*;
+import fr.thejordan.historyland.object.common.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;

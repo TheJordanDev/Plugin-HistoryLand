@@ -1,7 +1,7 @@
 package fr.thejordan.historyland.command;
 
-import fr.thejordan.historyland.object.AbstractCommand;
 import fr.thejordan.historyland.object.collectible.CollectibleGUI;
+import fr.thejordan.historyland.object.common.AbstractCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -2,8 +2,8 @@ package fr.thejordan.historyland.command;
 
 import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.manager.ResourcePackManager;
-import fr.thejordan.historyland.object.AbstractCommand;
-import fr.thejordan.historyland.object.Translator;
+import fr.thejordan.historyland.object.common.AbstractCommand;
+import fr.thejordan.historyland.object.common.Translator;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

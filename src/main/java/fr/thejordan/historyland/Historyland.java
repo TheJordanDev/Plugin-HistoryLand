@@ -1,7 +1,7 @@
 package fr.thejordan.historyland;
 
 import fr.thejordan.historyland.manager.*;
-import fr.thejordan.historyland.object.AbstractManager;
+import fr.thejordan.historyland.object.common.AbstractManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,6 +27,8 @@ public final class Historyland extends JavaPlugin {
         instance = this;
         managers = List.of(
                 new MainManager(this),
+                new JetManager(this),
+                new LightManager(this),
                 new LanguageManager(this),
                 new PreferencesManager(this),
                 new ResourcePackManager(this),

@@ -2,8 +2,8 @@ package fr.thejordan.historyland.manager;
 
 import fr.thejordan.historyland.command.WarpCommand;
 import fr.thejordan.historyland.helper.FileHelper;
-import fr.thejordan.historyland.object.AbstractCommand;
-import fr.thejordan.historyland.object.AbstractManager;
+import fr.thejordan.historyland.object.common.AbstractCommand;
+import fr.thejordan.historyland.object.common.AbstractManager;
 import fr.thejordan.historyland.object.warps.WarpList;
 import fr.thejordan.historyland.object.warps.WarpListConfig;
 import org.bukkit.configuration.file.YamlConfiguration;

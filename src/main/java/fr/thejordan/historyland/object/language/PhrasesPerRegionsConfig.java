@@ -1,6 +1,6 @@
 package fr.thejordan.historyland.object.language;
 
-import fr.thejordan.historyland.object.AbstractConfigFile;
+import fr.thejordan.historyland.object.common.AbstractConfigFile;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
