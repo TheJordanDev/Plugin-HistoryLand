@@ -1,14 +1,13 @@
 package fr.thejordan.historyland.manager;
 
 import com.earth2me.essentials.Essentials;
-import fr.thejordan.historyland.command.BroadcastCommand;
-import fr.thejordan.historyland.command.ReloadCommand;
-import fr.thejordan.historyland.object.common.AbstractCommand;
-import fr.thejordan.historyland.object.common.AbstractManager;
-import fr.thejordan.historyland.object.common.MainData;
+import fr.thejordan.historyland.command.*;
+import fr.thejordan.historyland.object.common.*;
 import fr.thejordan.historyland.scheduler.ActivityGiftScheduler;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -18,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
@@ -79,7 +79,10 @@ public class MainManager extends AbstractManager {
     public List<AbstractCommand> commands() {
         return List.of(
                 new BroadcastCommand(),
-                new ReloadCommand()
+                new ReloadCommand(),
+                new ChestCommand(),
+                new TprCommand(),
+                new ASCCommand()
         );
     }
 
@@ -138,5 +141,46 @@ public class MainManager extends AbstractManager {
         if (player.isOp()) return;
         event.setCancelled(true);
     }
+
+    @EventHandler
+    public void onASCAssign(PlayerInteractAtEntityEvent event) {
+        Player player = event.getPlayer();
+        if (!(event.getRightClicked() instanceof ArmorStand stand)) return;
+        ItemStack offHand = player.getInventory().getItemInOffHand();
+        if (offHand.getType().equals(Material.AIR)) return;
+        if (offHand.getType() != Material.BLAZE_ROD) return;
+        BItem item = BItem.of(offHand);
+        if (item.hData(Keys.ASCMD_KEY, PersistentDataType.STRING)) {
+            event.setCancelled(true);
+            String command = item.gData(Keys.ASCMD_KEY, PersistentDataType.STRING);
+            if (command == null) return;
+            stand.getPersistentDataContainer().set(Keys.ASC_CMD_KEY, PersistentDataType.STRING, command);
+            if (item.hData(Keys.ASCMD_ISSERVER_KEY, PersistentDataType.STRING))
+                stand.getPersistentDataContainer().set(Keys.ASCMD_ISSERVER_KEY, PersistentDataType.STRING, "true");
+            else
+                stand.getPersistentDataContainer().remove(Keys.ASCMD_ISSERVER_KEY);
+            player.sendMessage("§a§l\"" + command + "\" définis");
+        }
+    }
+
+    @EventHandler
+    public void onASCInteract(PlayerInteractAtEntityEvent event) {
+        Player player = event.getPlayer();
+        if (!(event.getRightClicked() instanceof ArmorStand stand)) return;
+        if (stand.getPersistentDataContainer().has(Keys.ASC_CMD_KEY,PersistentDataType.STRING)) {
+
+            BItem offHand = BItem.of(player.getInventory().getItemInOffHand());
+            if (offHand.getType() == Material.BLAZE_ROD) {
+                if (offHand.hData(Keys.ASCMD_KEY, PersistentDataType.STRING)) return;
+            }
+
+            String command = stand.getPersistentDataContainer().get(Keys.ASC_CMD_KEY,PersistentDataType.STRING);
+            if (command == null) return;
+            boolean server = stand.getPersistentDataContainer().has(Keys.ASCMD_ISSERVER_KEY,PersistentDataType.STRING);
+            CommandSender sender = server ? Bukkit.getConsoleSender() : player;
+            Bukkit.dispatchCommand(sender, command);
+        }
+    }
+
 
 }

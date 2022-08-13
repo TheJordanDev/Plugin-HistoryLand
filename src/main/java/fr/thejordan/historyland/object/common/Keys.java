@@ -38,4 +38,8 @@ public class Keys {
     //JETS
     public static final NamespacedKey JET_KEY = new NamespacedKey(Historyland.instance(), "jet");
 
+    //ASC
+    public static final NamespacedKey ASCMD_KEY = new NamespacedKey(Historyland.instance(), "asc");
+    public static final NamespacedKey ASC_CMD_KEY = new NamespacedKey(Historyland.instance(), "asccommand");
+    public static final NamespacedKey ASCMD_ISSERVER_KEY = new NamespacedKey(Historyland.instance(), "isServer");
 }

@@ -6,24 +6,25 @@ authors: [ TheJordan ]
 depend: [Essentials, WorldGuard]
 description: Plugin pour HistoryLand
 commands:
-  sit:
-  realtime:
-  tpr:
-  chest:
-  rideop:
-  motd:
-  shop:
-  resourcepack:
-  properties:
   armorstandcommand:
+    aliases: [ asc ]
+  chest:
   collectibles:
-  language:
-  hwarps:
+  properties:
   hbroadcast:
+  hreload:
+  hwarps:
+  jet:
+    aliases: [hrl]
+  language:
   light:
     aliases: [lgt]
-  jet:
-  hreload:
-    aliases: [hrl]
+  motd:
   preferences:
     aliases: [prefs]
+  realtime:
+  resourcepack:
+  rideop:
+  shop:
+  sit:
+  tpr:

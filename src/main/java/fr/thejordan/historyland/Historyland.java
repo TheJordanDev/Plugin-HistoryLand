@@ -27,6 +27,8 @@ public final class Historyland extends JavaPlugin {
         instance = this;
         managers = List.of(
                 new MainManager(this),
+                new MotdManager(this),
+                new RealTimeManager(this),
                 new JetManager(this),
                 new LightManager(this),
                 new LanguageManager(this),

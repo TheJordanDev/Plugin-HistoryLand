@@ -45,4 +45,13 @@ public class Items {
                 .stack();
     }
 
+    public static ItemStack ascmdWand(String command, boolean server) {
+        BItem item = BItem.of(Material.BLAZE_ROD)
+                .displayName(((server) ? "§c" : "§e")+"ASC")
+                .lore("§6"+command)
+                .sData(Keys.ASCMD_KEY, PersistentDataType.STRING, command);
+        if (server) item.sData(Keys.ASCMD_ISSERVER_KEY, PersistentDataType.STRING, "true");
+        return item.stack();
+    }
+
 }

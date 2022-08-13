@@ -5,17 +5,18 @@ import fr.thejordan.historyland.helper.FileHelper;
 import fr.thejordan.historyland.object.collectible.Collectible;
 import fr.thejordan.historyland.object.collectible.CollectibleConfig;
 import fr.thejordan.historyland.object.collectible.PlayersItems;
-import fr.thejordan.historyland.object.common.AbstractCommand;
-import fr.thejordan.historyland.object.common.AbstractManager;
-import fr.thejordan.historyland.object.common.BItem;
-import fr.thejordan.historyland.object.common.Keys;
+import fr.thejordan.historyland.object.common.*;
 import fr.thejordan.historyland.object.shop.BoughtItemsConfig;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -76,7 +77,7 @@ public class CollectibleManager extends AbstractManager {
 
     @Override
     public List<Listener> listeners() {
-        return null;
+        return List.of(this);
     }
 
     @Override
@@ -131,6 +132,33 @@ public class CollectibleManager extends AbstractManager {
         if (instance.owned.containsKey(player.getUniqueId()))
             return instance.owned.get(player.getUniqueId()).items().stream().map(CollectibleManager::getByID).filter(Objects::nonNull).collect(Collectors.toCollection(ArrayList::new));
         return new ArrayList<>();
+    }
+
+    @EventHandler
+    public void onPlayerSwapHand(PlayerSwapHandItemsEvent event) {
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getMainHandItem();
+        if (!isCollectible(itemStack)) return;
+        if (player.hasPermission("historyland.swap_costmetics")) return;
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInventoryClickCosmeticEvent(InventoryClickEvent event) {
+        Player player = (Player)event.getWhoClicked();
+        Inventory inventory = event.getClickedInventory();
+        if (inventory == null) return;
+        if (inventory.getType() != InventoryType.PLAYER && inventory.getType() != InventoryType.CRAFTING) return;
+        InventoryType.SlotType slotType = event.getSlotType();
+        if (!isCosmeticSlot(event.getRawSlot(),slotType)) return;
+        ItemStack itemStack = event.getCurrentItem();
+        if (itemStack == null) return;
+        if (isCollectible(itemStack)) {
+            if (player.hasPermission("historyland.swap_costmetics")) return;
+            event.setCancelled(true);
+            event.setCurrentItem(null);
+            Translator.send(player,"collectible_put_away");
+        }
     }
 
 

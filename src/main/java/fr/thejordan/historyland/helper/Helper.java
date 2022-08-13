@@ -1,27 +1,35 @@
 package fr.thejordan.historyland.helper;
 
+import fr.thejordan.historyland.object.common.Position;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.hover.content.Text;
+import net.minecraft.core.BlockPosition;
+import net.minecraft.server.level.WorldServer;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.command.BlockCommandSender;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommandYamlParser;
+import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.text.NumberFormat;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -309,6 +317,109 @@ public class Helper {
             origin = ((BlockCommandSender) sender).getBlock().getLocation().clone();
         else origin = new Location(Bukkit.getWorlds().get(0), 0, 0, 0);
         return origin;
+    }
+
+    public static int toInt(String arg) {
+        try {
+            return Integer.parseInt(arg);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    public static boolean isChest(Block block) {
+        return block.getBlockData() instanceof Chest;
+    }
+
+    public static void toggleChest(Block block, boolean open) {
+        if (!isChest(block)) return;
+        WorldServer world = ((CraftWorld) block.getWorld()).getHandle();
+        BlockPosition position = new BlockPosition(block.getX(), block.getY(), block.getZ());
+        world.playBlockAction(position, world.getType(position).getBlock(), 1, open ? 1 : 0);
+    }
+
+    public static Location getRelativeFromSender(CommandSender sender, Position X, Position Y, Position Z) {
+        Location origin = getSendersLocation(sender);
+        Vector offset = new Vector(
+                (X.isRelative()) ? X.getNumber().doubleValue() : 0,
+                (Y.isRelative()) ? Y.getNumber().doubleValue() : 0,
+                (Z.isRelative()) ? Z.getNumber().doubleValue() : 0
+        );
+        if (!X.isRelative()) origin.setX(X.getNumber().doubleValue());
+        if (!Y.isRelative()) origin.setY(Y.getNumber().doubleValue());
+        if (!Z.isRelative()) origin.setZ(Z.getNumber().doubleValue());
+        origin = origin.add(offset);
+        return origin;
+    }
+
+    public static boolean isNumber(String string) {
+        try {
+            return NumberFormat.getInstance().parse(string) != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static Number toNumber(String string) {
+        try {
+            return NumberFormat.getInstance().parse(string);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Location getRelativeFromEntity(Location location, Entity entity, Position X, Position Y, Position Z) {
+        Location origin = entity.getLocation();
+        Vector shift = entity.getLocation().toVector().subtract(location.toVector());
+        Vector offset = new Vector(
+                (X.isRelative()) ? X.getNumber().doubleValue() : 0,
+                (Y.isRelative()) ? Y.getNumber().doubleValue() : 0,
+                (Z.isRelative()) ? Z.getNumber().doubleValue() : 0
+        );
+        if (!X.isRelative()) origin.setX(X.getNumber().doubleValue() + shift.getX());
+        if (!Y.isRelative()) origin.setY(Y.getNumber().doubleValue() + shift.getY());
+        if (!Z.isRelative()) origin.setZ(Z.getNumber().doubleValue() + shift.getZ());
+        origin = origin.add(offset);
+        return origin;
+    }
+
+    public static Double toDouble(String arg) {
+        return Double.parseDouble(arg);
+    }
+    public static boolean isPosition(String arg) {
+        return Position.parse(arg) != null;
+    }
+
+    public static boolean isEntity(String string) {
+        try {
+            EntityType.valueOf(string.toUpperCase());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static EntityType toEntity(String string) {
+        return EntityType.valueOf(string.toUpperCase());
+    }
+
+    public static HashMap<String, List<Command>> getCommands() {
+        HashMap<String,List<Command>> toReturn = new HashMap<>();
+        for(Plugin plugin : Bukkit.getPluginManager().getPlugins()) {
+            String pName = plugin.getName();
+            List<Command> commandList = PluginCommandYamlParser.parse(plugin);
+            toReturn.put(pName,commandList);
+        }
+        return toReturn;
+    }
+
+    public static String formatMotd(String line) {
+        String returned = line;
+        returned = returned.replace("&", "§");
+        for (int i = 1; i <= 9; i++) {
+            returned = returned.replaceAll("/s" + i, repeat(i, " "));
+        }
+        return returned;
     }
 
 }
