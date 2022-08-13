@@ -422,4 +422,8 @@ public class Helper {
         return returned;
     }
 
+    public static String repeat(int count, String with) {
+        return new String(new char[count]).replace("\0", with);
+    }
+
 }
