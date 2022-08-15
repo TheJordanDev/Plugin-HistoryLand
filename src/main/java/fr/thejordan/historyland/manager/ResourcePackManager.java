@@ -23,10 +23,10 @@ public class ResourcePackManager extends AbstractManager {
     private static ResourcePackManager instance;
     public static ResourcePackManager instance() { return instance; }
 
-    private Map<UUID, String> joinRequest = new HashMap<>();
+    private final Map<UUID, String> joinRequest = new HashMap<>();
     public Map<UUID, String> getJoinRequest() { return joinRequest; }
 
-    private List<UUID> kickedForResourcepack = new ArrayList<>();
+    private final List<UUID> kickedForResourcepack = new ArrayList<>();
     public List<UUID> getKickedForResourcepack() { return kickedForResourcepack; }
 
     private List<UUID> bypassList;
@@ -56,7 +56,6 @@ public class ResourcePackManager extends AbstractManager {
     @Override
     public void onDisable() {
         super.onDisable();
-        Historyland.log("ONDISABLE");
         this.bypassResourcePackConfig.save(getBypassList());
     }
 

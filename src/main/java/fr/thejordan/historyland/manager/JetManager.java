@@ -58,13 +58,16 @@ public class JetManager extends AbstractManager {
     }
 
     @Override
+    public void onReload() {
+        jets = config.load().stream().collect(Collectors.toMap(JetCategory::getId, Function.identity()));
+    }
+
+    @Override
     public void onDisable() {
         super.onDisable();
-        jets.forEach((id, cat) -> {
-            cat.getJets().forEach((name, jet) -> {
-                if (jet.getTwinScheduler() != null) jet.getTwinScheduler().cancel();
-            });
-        });
+        jets.forEach((id, cat) -> cat.getJets().forEach((name, jet) -> {
+            if (jet.getTwinScheduler() != null) jet.getTwinScheduler().cancel();
+        }));
         config.save(new ArrayList<>(jets.values()));
     }
 

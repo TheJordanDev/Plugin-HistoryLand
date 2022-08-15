@@ -8,8 +8,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 
-import java.util.List;
-
 public class Jet {
 
     @Getter private final String id;
@@ -38,7 +36,8 @@ public class Jet {
     public boolean arePlayersNearby(double ray) {
         if (location == null) return false;
         if (!location.getChunk().isLoaded()) return false;
-        return !JetUtils.getNearbyEntities(location,ray,ray,ray, List.of(EntityType.PLAYER)).isEmpty();
+        if (ray < 1D) return false;
+        return !location.getWorld().getNearbyEntities(location,ray,ray,ray, (e)->e.getType()==EntityType.PLAYER).isEmpty();
     }
 
     public JetCategory parent() {

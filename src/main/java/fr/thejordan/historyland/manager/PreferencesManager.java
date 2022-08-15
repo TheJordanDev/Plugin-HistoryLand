@@ -40,6 +40,14 @@ public class PreferencesManager extends AbstractManager {
     }
 
     @Override
+    public void onReload() {
+        this.preferences = preferenceConfig.load().stream().collect(HashMap::new, (map, preference) -> map.put(preference.uuid(), preference), Map::putAll);
+        Bukkit.getOnlinePlayers().stream().filter(player -> !preferences.containsKey(player.getUniqueId())).forEach(player ->
+                preferences.put(player.getUniqueId(), new PlayerPreferences(player.getUniqueId()))
+        );
+    }
+
+    @Override
     public void onDisable() {
         super.onDisable();
         preferenceConfig.save(new ArrayList<>(preferences.values()));

@@ -82,7 +82,8 @@ public class MainManager extends AbstractManager {
                 new ReloadCommand(),
                 new ChestCommand(),
                 new TprCommand(),
-                new ASCCommand()
+                new ASCCommand(),
+                new RideOpCommand()
         );
     }
 
@@ -101,16 +102,6 @@ public class MainManager extends AbstractManager {
     @EventHandler
     public void onCommandProp(PlayerCommandSendEvent event) {
         event.getCommands().removeIf((s) -> s.contains("historyland:"));
-    }
-
-    @EventHandler
-    public void onInspect(PlayerInteractEvent event) {
-        if (event.getHand() != EquipmentSlot.HAND) return;
-        if (!event.getAction().name().startsWith("RIGHT_CLICK")) return;
-        Player player = event.getPlayer();
-        ItemStack stack = player.getInventory().getItemInMainHand();
-        if (stack == null) return;
-        if (stack.getType() != Material.KNOWLEDGE_BOOK) return;
     }
 
     @EventHandler

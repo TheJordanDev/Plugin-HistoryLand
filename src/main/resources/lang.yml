@@ -11,18 +11,20 @@ strings:
   gui_next: "§7§lNext"
   gui_previous: "§7§lPrevious"
   gui_back: "§7§lBack"
-  #UI
+  #TITLES
   menu_language_title: "Language"
-  menu_inventory_next: "§7§lNext"
-  menu_inventory_previous: "§7§lPrevious"
-  menu_inventory_back: "§7§lBack"
+  menu_shop_title: "§6§lShop §7§l- §a§l%shop%"
+  menu_collectible_title: "§d§lYour wardrobe"
+  menu_preferences_title: "§dYour preferences"
+  menu_warplist_title: "Warps"
+  menu_warptp_title: "%list%'s warps"
   #RESOURCE PACK
   resourcepack_sent: "§aOur resourcepack was sent to you !"
   resourcepack_accepted: "§aThank you for downloading our resource pack !"
   resourcepack_loaded: "§eResource Pack loaded successfully !"
   resourcepack_declined: "§4§l[WARNING]§r \n§cYou must allow the server's resource pack !"
-  resourcepack_failed: "§4§l[WARNING]§r \n§cThe resource pack's download failed !"
-  resourcepack_bypassed: "§aYou chose to not receive the resource pack !\n§6If you ever need it just do /resourcepack."
+  resourcepack_failed: "§4§l[WARNING]§r \n§cThe resource packs download failed !"
+  resourcepack_bypassed: "§aYou choose to not receive the resource pack !\n§6If you ever need it just do /resourcepack."
   resourcepack_updated: "§eThe resource pack changed. We are sending you the new one."
   resourcepack_updated_bypass: "§6The resource pack changed. But you are immune, nice !"
   resourcepack_bypass_on: "§cYou won't be forced to download our resource pack !"
@@ -36,13 +38,11 @@ strings:
   seat_someone_already: "§cSomeone is already seated here !"
   seat_too_far: "§cYou are too far away from the seat !"
   #SHOP
-  menu_shop_title: "§6§lShop §7§l- §a§l%shop%"
   shop_already_bought: "§cYou already have '§6§l%item%§c' !"
   shop_purchase_successful: "§aThank you for buying %amount% %item% !"
   shop_purchase_error: "§cError: Payment cancelled !"
   shop_purchase_not_enough_found: "§cYou do not have enough money to buy this item !"
   #COLLECTIBLES
-  menu_collectible_title: "§d§lYour wardrobe"
   menu_collectible_put_away: "§6The item was stored."
   menu_collectible_filter_current: "§3Filter by §6%type%"
   menu_collectible_filter_next: "§a[Right Click] §b%type%"
@@ -56,9 +56,5 @@ strings:
   menu_collectible_equipped: "§a§l☑ Equipped"
   menu_collectible_not_equipped: "§6§l☐ Not Equipped"
   #PREFERENCES
-  menu_preferences_title: "§dYour preferences"
   click_to_open_preferences: "§dClick to open your preferences"
   preferences_show_gift_message: "Show Reward Message"
-  #WARPS
-  menu_warplist_title: "Warps"
-  menu_warptp_title: "Warps of %list%"
