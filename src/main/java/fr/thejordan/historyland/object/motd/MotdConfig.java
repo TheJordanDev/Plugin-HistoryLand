@@ -7,12 +7,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class MotdConfig extends AbstractConfigFile<List<String>> {
+public class MotdConfig extends AbstractConfigFile<Motd> {
 
     public MotdConfig(JavaPlugin plugin) {
         super(plugin);
@@ -29,19 +28,19 @@ public class MotdConfig extends AbstractConfigFile<List<String>> {
     }
 
     @Override
-    public Function<YamlConfiguration, List<String>> loadProcess() {
+    public Function<YamlConfiguration, Motd> loadProcess() {
         ArrayList<String> def = new ArrayList<>(List.of(Bukkit.getMotd().split("\n")));
-        return (conf)-> new ArrayList<>(Arrays.asList(
+        return (conf)-> new Motd(
                 conf.getString("line1", (def.size() >= 1) ? def.get(0) : ""),
                 conf.getString("line2", (def.size() >= 2) ? def.get(1) : "")
-        ));
+        );
     }
 
     @Override
-    public Consumer<List<String>> saveProcess(YamlConfiguration configuration) {
+    public Consumer<Motd> saveProcess(YamlConfiguration configuration) {
         return (motd)-> {
-            configuration.set("line1", (motd.size() >= 1) ? motd.get(0) : "");
-            configuration.set("line2", (motd.size() >= 2) ? motd.get(1) : "");
+            configuration.set("line1", motd.getLine1());
+            configuration.set("line2", motd.getLine2());
         };
     }
 }

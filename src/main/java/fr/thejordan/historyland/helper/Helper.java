@@ -413,15 +413,6 @@ public class Helper {
         return toReturn;
     }
 
-    public static String formatMotd(String line) {
-        String returned = line;
-        returned = returned.replace("&", "§");
-        for (int i = 1; i <= 9; i++) {
-            returned = returned.replaceAll("/s" + i, repeat(i, " "));
-        }
-        return returned;
-    }
-
     public static String repeat(int count, String with) {
         return new String(new char[count]).replace("\0", with);
     }

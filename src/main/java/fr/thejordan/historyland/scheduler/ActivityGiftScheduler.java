@@ -37,16 +37,16 @@ public class ActivityGiftScheduler extends BukkitRunnable {
             Long lastTime = MainManager.instance().lastGifts().getOrDefault(player.getUniqueId(),currentTime);
             if (!MainManager.instance().lastGifts().containsKey(player.getUniqueId()))
                 MainManager.instance().lastGifts().put(player.getUniqueId(), currentTime);
-            if ((currentTime - lastTime)/1000 > MainManager.instance().data().activityGiftDelay()) {
+            if ((currentTime - lastTime)/1000 > MainManager.instance().data().getActivityGiftDelay()) {
                 MainManager.instance().lastGifts().put(player.getUniqueId(), currentTime);
                 try {user.setMoney(user.getMoney()
-                        .add(BigDecimal.valueOf(MainManager.instance().data().activityGiftAmount()))
+                        .add(BigDecimal.valueOf(MainManager.instance().data().getActivityGiftAmount()))
                 );
                 } catch (MaxMoneyException ignored) {}
                 boolean showMessage = (boolean) PreferencesManager.instance().getPreference(player.getUniqueId(), Preference.SHOW_ACTIVITY_REWARD);
                 if (showMessage) {
-                    double amount = MainManager.instance().data().activityGiftAmount();
-                    String currency = MainManager.instance().data().currency();
+                    double amount = MainManager.instance().data().getActivityGiftAmount();
+                    String currency = MainManager.instance().data().getCurrency();
                     String message = Translator.translate(player, "activity_gift_message",
                             Map.of("amount", String.valueOf(amount), "currency", currency));
                     String tooltip = Translator.translate(player, "click_to_open_preferences");

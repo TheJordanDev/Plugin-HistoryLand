@@ -12,7 +12,9 @@ commands:
   collectibles:
   properties:
   hbroadcast:
+  hchat:
   hreload:
+  visibility:
   hwarps:
   jet:
     aliases: [hrl]

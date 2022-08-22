@@ -4,16 +4,20 @@ import com.earth2me.essentials.Essentials;
 import fr.thejordan.historyland.command.*;
 import fr.thejordan.historyland.object.common.*;
 import fr.thejordan.historyland.scheduler.ActivityGiftScheduler;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Hanging;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
@@ -32,6 +36,8 @@ public class MainManager extends AbstractManager {
 
     private Essentials essentials;
     public Essentials essentials() { return essentials; }
+
+    @Getter @Setter private boolean chat = true;
 
     private MainData data;
     public MainData data() { return data; }
@@ -71,6 +77,12 @@ public class MainManager extends AbstractManager {
     }
 
     @Override
+    public void onDisable() {
+        super.onDisable();
+        data.save(plugin().getConfig());
+    }
+
+    @Override
     public List<Listener> listeners() {
         return List.of(this);
     }
@@ -83,7 +95,9 @@ public class MainManager extends AbstractManager {
                 new ChestCommand(),
                 new TprCommand(),
                 new ASCCommand(),
-                new RideOpCommand()
+                new RideOpCommand(),
+                new ChatCommand(),
+                new HidePlayerCommand()
         );
     }
 
@@ -97,6 +111,14 @@ public class MainManager extends AbstractManager {
     public void onLeave(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         lastGifts.remove(player.getUniqueId());
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent event) {
+        if (isChat()) return;
+        if (event.getPlayer().isOp()) return;
+        if (event.getPlayer().hasPermission("historyland.bypass_chat")) return;
+        event.setCancelled(true);
     }
 
     @EventHandler
@@ -125,9 +147,16 @@ public class MainManager extends AbstractManager {
         event.setCancelled(true);
     }
 
-    @EventHandler
-    public void onItemFramePop(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof ItemFrame)) return;
+    @EventHandler // Hanging Destroy
+    public void onHangingDestroy(HangingBreakByEntityEvent event) {
+        if (!(event.getRemover() instanceof Player player)) return;
+        if (player.isOp()) return;
+        event.setCancelled(true);
+    }
+
+    @EventHandler // ItemRemove
+    public void onIFPaintingPop(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof Hanging)) return;
         if (!(event.getDamager() instanceof Player player)) return;
         if (player.isOp()) return;
         event.setCancelled(true);

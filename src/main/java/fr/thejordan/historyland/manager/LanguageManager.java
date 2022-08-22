@@ -124,6 +124,7 @@ public class LanguageManager extends AbstractManager {
             WGHelper.getPlayersInRegionOfCode(key,targets).forEach(p -> {
                 if (!Translator.canTranslate(p,key)) return;
                 String sent = ChatColor.translateAlternateColorCodes('&', Translator.translate(p, key));
+                if (sent.isEmpty()) return;
                 if (type == BCType.CHAT) p.sendMessage(sent);
                 else if (type == BCType.ACTION) p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(sent));
             });

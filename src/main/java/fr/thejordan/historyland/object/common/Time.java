@@ -5,8 +5,11 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.regex.Pattern;
 
 public class Time {
+
+    public static final Pattern pattern = Pattern.compile("[0-24]+H[0-60]+M([0-60]+S)?");
 
     @Getter
     public Integer year = 0;
@@ -125,6 +128,20 @@ public class Time {
         } else {
             seconds++;
         }
+    }
+
+    public static boolean isValidTime(String time) {
+        return pattern.matcher(time).matches();
+    }
+
+    public static Time fromString(String time) {
+        if (!isValidTime(time)) return getNow();
+        Time t = new Time();
+        String[] times = time.split("[HMS]");
+        t.setHour(Integer.parseInt(times[0]));
+        t.setMinutes(Integer.parseInt(times[1]));
+        if (times.length == 3) t.setSeconds(Integer.parseInt(times[2]));
+        return t;
     }
 
     public String dateString() {

@@ -42,14 +42,16 @@ public class RealTimeCommand extends AbstractCommand {
             }
         } else if (args.length == 2) {
             if (args[0].equalsIgnoreCase("set")) {
-                if (Helper.isInt(args[1])) {
-                    Time time = new Time().setHour(Helper.toInt(args[1]));
+                Time time = null;
+                if (Helper.isInt(args[1])) time = new Time().setHour(Helper.toInt(args[1]));
+                else if (Time.isValidTime(args[1])) time = Time.fromString(args[1]);
+                if (time != null) {
                     World world = Helper.getSendersLocation(commandSender).getWorld();
                     if(world == null) return false;
                     world.setTime(time.toTicks());
                     RealTimeManager.instance().getRealTime().add(world, time.toTicks());
-                    commandSender.sendMessage("§aLe temps du monde " + world.getName() + " est mis à " + time.timeString());
-                }
+                    return sendMessageT(commandSender, "§aLe temps du monde " + world.getName() + " est mis à " + time.timeString());
+                } else return sendMessageT(commandSender, "§c/realtime set <H/HM(S)>");
             }
         }
         return false;
@@ -57,7 +59,10 @@ public class RealTimeCommand extends AbstractCommand {
 
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
-        return (args.length == 1) ? Helper.autocomplete(args[0], Arrays.asList("set", "stop")) : List.of();
+        List<String> returned = List.of();
+        if (args.length == 1) returned = Arrays.asList("set", "stop");
+        else if (args.length == 2 && args[0].equalsIgnoreCase("set")) returned = Arrays.asList("H","0H0M(0S)");
+        return Helper.autocomplete(args[args.length - 1], returned);
     }
 
 }

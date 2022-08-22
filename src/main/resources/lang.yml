@@ -7,6 +7,12 @@ strings:
   welcome_message: "§6[§r§eHistory Land§l§6] §r§fWelcome back %player% !"
   first_join_welcome_message: "§6[§r§eHistory Land§l§6] §r§fNice to mee you, %player% !"
   leave_message: "§6[§r§eHistory Land§l§6] §r§fSee you next time %player% !"
+  #CHAT
+  chat_enabled: "§aChat is now enabled !"
+  chat_disabled: "§cChat is now disabled !"
+  #VISIBILITY
+  visibility_enabled: "§aVisibility is now enabled !"
+  visibility_disabled: "§cVisibility is now disabled !"
   #GUI
   gui_next: "§7§lNext"
   gui_previous: "§7§lPrevious"

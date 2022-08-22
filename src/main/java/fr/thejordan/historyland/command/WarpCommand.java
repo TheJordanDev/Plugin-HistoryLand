@@ -26,7 +26,7 @@ public class WarpCommand extends AbstractCommand {
 
     @Override
     public String permission() {
-        return null;
+        return "historyland.warps";
     }
 
     @Override

@@ -35,6 +35,7 @@ public class RealTimeManager extends AbstractManager {
         super.onEnable();
         this.worlds = realTimeConfig.load();
         this.realTime = new RealTimeScheduler(worlds);
+        this.realTime.start();
     }
 
     @Override
@@ -43,6 +44,7 @@ public class RealTimeManager extends AbstractManager {
         this.worlds = realTimeConfig.load();
         this.realTime.getWorlds().clear();
         this.realTime.getWorlds().putAll(worlds);
+
     }
 
     @Override

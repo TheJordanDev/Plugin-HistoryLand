@@ -1,9 +1,9 @@
 package fr.thejordan.historyland.manager;
 
 import fr.thejordan.historyland.command.MotdCommand;
-import fr.thejordan.historyland.helper.Helper;
 import fr.thejordan.historyland.object.common.AbstractCommand;
 import fr.thejordan.historyland.object.common.AbstractManager;
+import fr.thejordan.historyland.object.motd.Motd;
 import fr.thejordan.historyland.object.motd.MotdConfig;
 import lombok.Getter;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MotdManager extends AbstractManager {
@@ -21,7 +20,7 @@ public class MotdManager extends AbstractManager {
 
     private final MotdConfig motdConfig;
 
-    @Getter private List<String> motd = new ArrayList<>();
+    @Getter private Motd motd = new Motd();
 
 
     public MotdManager(JavaPlugin plugin) {
@@ -60,10 +59,7 @@ public class MotdManager extends AbstractManager {
 
     @EventHandler
     public void onPin(ServerListPingEvent event) {
-        String _motd = "";
-        if (motd.size() == 1) _motd = motd.get(0);
-        else if (motd.size() == 2) _motd = motd.get(0) + "\n" + motd.get(1);
-        event.setMotd(Helper.formatMotd(_motd));
+        event.setMotd(motd.format());
     }
 
 }

@@ -44,8 +44,8 @@ public class ResourcePackCommand extends AbstractCommand {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player player))
             return sendMessageF(sender, "You must be a player to use this command.");
-        if (args.length == 0 || (!player.hasPermission("historyland.resourcepack.bypass") && !player.hasPermission("historyland.resourcepack.join")))
-            return sendMessageF(sender, "You must specify a resourcepack.");
+        if (args.length == 0 || (!player.hasPermission("historyland.resourcepack.bypass") && !player.hasPermission("historyland.resourcepack.change")))
+            return ResourcePackManager.instance().sendPack(player, false);
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("bypass")) {
                 UUID uuid = player.getUniqueId();

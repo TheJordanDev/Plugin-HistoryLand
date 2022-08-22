@@ -21,8 +21,6 @@ public class RealTimeScheduler extends BukkitRunnable {
     public void add(World world, Long time) {
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
-        world.setStorm(false);
-        world.setThundering(false);
         this.worlds.put(world, time);
     }
 
@@ -40,8 +38,6 @@ public class RealTimeScheduler extends BukkitRunnable {
         for (World world : worlds.keySet()) {
             world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
             world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
-            world.setStorm(false);
-            world.setThundering(false);
         }
         runTaskTimer(Historyland.instance(), 0L, 72L);
         return this;
